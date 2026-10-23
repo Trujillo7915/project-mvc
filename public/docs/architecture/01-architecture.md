@@ -1,6 +1,6 @@
 # Arquitectura de alto nivel
 
-Aplicación web con **Next.js (App Router) + React**, organizada con el patrón **MVC**, con base de datos **MySQL**. La app y la base de datos corren en contenedores separados que se levantan juntos con **Docker Compose**.
+Aplicación web con **Next.js (App Router) + React + TypeScript**, organizada con el patrón **MVC**, con base de datos **MySQL**. La app y la base de datos corren en contenedores separados que se levantan juntos con **Docker Compose**.
 
 ## Vista general
 
@@ -10,7 +10,7 @@ Aplicación web con **Next.js (App Router) + React**, organizada con el patrón 
 
 | Capa | Carpeta | Responsabilidad |
 |---|---|---|
-| Rutas | `src/app/` | Define las URL. Cada `page.jsx` solo monta una vista; cada `route.js` solo delega en un controlador |
+| Rutas | `src/app/` | Define las URL. Cada `page.tsx` solo monta una vista; cada `route.ts` solo delega en un controlador |
 | Vista (V) | `src/view/` | Componentes React: listas, formularios y componentes compartidos |
 | Controlador (C) | `src/controller/` | Valida la petición, aplica reglas de negocio y llama al modelo |
 | Modelo (M) | `src/model/` | Estructura de cada entidad y acceso a MySQL |
@@ -59,6 +59,7 @@ project-mvc/
 
 El script de la base de datos está en [`../model-data/01-schema.sql`](../model-data/01-schema.sql). El servicio `db` lo monta como `./public/docs/model-data:/docker-entrypoint-initdb.d:ro`.
 
-## Decisiones pendientes
-
-- Lenguaje: JavaScript o TypeScript.
+## Decisiones adoptadas
+ 
+- **Lenguaje:** TypeScript (`.ts` para controladores, modelos, rutas y librerías; `.tsx` para páginas y componentes de vista).
+- **Normalización de roles:** Se implementó la entidad normalizada `role` (1FN, 2FN, 3FN) y la clave foránea `role_id` en `user`.

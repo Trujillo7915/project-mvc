@@ -12,8 +12,8 @@ node "Navegador" as B {
 node "Docker Compose (docker-compose.yml)" as DC {
   node "Contenedor app\n(imagen desde Dockerfile)" as APP {
     node "Servidor Next.js :3000" as N {
-      component "Rutas de página\nsrc/app/**/page.jsx" as P
-      component "Rutas API\nsrc/app/api/**/route.js" as A
+      component "Rutas de página\nsrc/app/**/page.tsx" as P
+      component "Rutas API\nsrc/app/api/**/route.ts" as A
       component "Controladores\nsrc/controller/*" as C
       component "Modelos\nsrc/model/*" as M
     }

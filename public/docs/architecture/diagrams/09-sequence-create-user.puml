@@ -4,12 +4,12 @@ title Secuencia - Crear usuario
 autonumber
 
 actor "Administrador" as U
-participant "user-form.jsx\n<<view>>" as V
-participant "api/user/route.js\n<<route>>" as R
-participant "user-controller.js\n<<controller>>" as C
-participant "person-model.js\n<<model>>" as PM
-participant "role-model.js\n<<model>>" as RM
-participant "user-model.js\n<<model>>" as M
+participant "user-form.tsx\n<<view>>" as V
+participant "api/user/route.ts\n<<route>>" as R
+participant "user-controller.ts\n<<controller>>" as C
+participant "person-model.ts\n<<model>>" as PM
+participant "role-model.ts\n<<model>>" as RM
+participant "user-model.ts\n<<model>>" as M
 database "MySQL" as DB
 
 U -> V : elige persona y rol, escribe username y contraseña

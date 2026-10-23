@@ -4,11 +4,11 @@ title Secuencia - Crear ciudad
 autonumber
 
 actor "Administrador" as U
-participant "city-form.jsx\n<<view>>" as V
-participant "api/city/route.js\n<<route>>" as R
-participant "city-controller.js\n<<controller>>" as C
-participant "state-model.js\n<<model>>" as SM
-participant "city-model.js\n<<model>>" as M
+participant "city-form.tsx\n<<view>>" as V
+participant "api/city/route.ts\n<<route>>" as R
+participant "city-controller.ts\n<<controller>>" as C
+participant "state-model.ts\n<<model>>" as SM
+participant "city-model.ts\n<<model>>" as M
 database "MySQL" as DB
 
 U -> V : elige el departamento y llena los datos

@@ -29,12 +29,14 @@ java -jar plantuml.jar -tsvg -charset UTF-8 [0-9]*.puml
 
 | Script | Contenido |
 |---|---|
-| [01-schema.sql](model-data/01-schema.sql) | Crea la base `project_mvc` y las 6 tablas con PK, FK y UNIQUE (MySQL 8.4) |
+| [01-schema.sql](model-data/01-schema.sql) | Crea la base `project_mvc` y las 7 tablas normalizadas con PK, FK y UNIQUE (MySQL 8.4) |
+| [02-seed.sql](model-data/02-seed.sql) | Inserta datos iniciales de prueba (roles, departamentos, ciudades, tipos de reserva, personas y usuarios) |
 
 Ejecutarlo contra MySQL:
 
 ```bash
 mysql -u root -p < public/docs/model-data/01-schema.sql
+mysql -u root -p < public/docs/model-data/02-seed.sql
 ```
 
-El script borra y vuelve a crear las tablas: no se debe ejecutar sobre una base que ya tenga datos.
+El script `01-schema.sql` borra y vuelve a crear las tablas: no se debe ejecutar sobre una base que ya tenga datos.

@@ -1,0 +1,51 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: project-mvc-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root_password}
+      MYSQL_DATABASE: ${DB_NAME:-project_mvc}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./public/docs/model-data:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-root_password}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - project-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: project-mvc-app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-root_password}
+      DB_NAME: ${DB_NAME:-project_mvc}
+      AUTH_SECRET: ${AUTH_SECRET:-your_super_secret_jwt_key_min_32_characters_long}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - project-network
+
+volumes:
+  mysql-data:
+
+networks:
+  project-network:
+    driver: bridge

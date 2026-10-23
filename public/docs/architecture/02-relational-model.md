@@ -16,10 +16,14 @@ Nombres según [best-practice.md](../governance/best-practice.md#34-base-de-dato
 | person | name | VARCHAR(100) | NOT NULL |
 | person | email | VARCHAR(150) | NOT NULL, UNIQUE |
 | person | phone | VARCHAR(20) | |
+| role | id | INT | PK, autoincremental |
+| role | name | VARCHAR(50) | NOT NULL, UNIQUE |
+| role | description | VARCHAR(255) | |
 | user | id | INT | PK, autoincremental |
 | user | username | VARCHAR(50) | NOT NULL, UNIQUE |
 | user | password | VARCHAR(255) | NOT NULL (se guarda el hash) |
 | user | person_id | INT | NOT NULL, FK → person.id |
+| user | role_id | INT | NOT NULL, FK → role.id |
 
 ### Módulo reservation
 
@@ -53,6 +57,7 @@ Nombres según [best-practice.md](../governance/best-practice.md#34-base-de-dato
 | Relación | Cardinalidad | Regla al borrar |
 |---|---|---|
 | person → user | 1 : N | No se borra una person que tenga user |
+| role → user | 1 : N | No se borra un role que tenga user |
 | user → reservation | 1 : N | No se borra un user que tenga reservation |
 | reservation_type → reservation | 1 : N | No se borra un tipo en uso |
 | state → city | 1 : N | No se borra un state que tenga city |
@@ -63,5 +68,6 @@ Nombres según [best-practice.md](../governance/best-practice.md#34-base-de-dato
 - **`user.username`:** en el modelo original la columna se llamaba `User`, igual que la tabla. Se renombró a `username` para no repetir el nombre de la tabla en la columna (`user.user`).
 - **Person → User es 1 : N.** Si cada persona solo puede tener un usuario, basta con poner `UNIQUE` en `user.person_id`.
 - **`reservation.city_id` conecta el módulo reservation con location:** cada reserva se hace en una ciudad.
+- **`role`:** se crea la entidad normalizada (1FN, 2FN, 3FN) para gestionar los perfiles de usuario (`admin`, `client`), manteniendo integridad referencial con `user.role_id`.
 - **Motor: MySQL 8.4.** Las tablas usan InnoDB y utf8mb4 para que las llaves foráneas funcionen y se acepten tildes y ñ.
 - **Minúsculas obligatorias:** MySQL en Linux (Docker) distingue mayúsculas en los nombres de tabla.

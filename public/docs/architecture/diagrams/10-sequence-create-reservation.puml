@@ -4,13 +4,13 @@ title Secuencia - Crear reserva
 autonumber
 
 actor "Cliente" as U
-participant "reservation-form.jsx\n<<view>>" as V
-participant "api/reservation/route.js\n<<route>>" as R
-participant "reservation-controller.js\n<<controller>>" as C
-participant "user-model.js\n<<model>>" as UM
-participant "reservation-type-model.js\n<<model>>" as TM
-participant "city-model.js\n<<model>>" as CM
-participant "reservation-model.js\n<<model>>" as M
+participant "reservation-form.tsx\n<<view>>" as V
+participant "api/reservation/route.ts\n<<route>>" as R
+participant "reservation-controller.ts\n<<controller>>" as C
+participant "user-model.ts\n<<model>>" as UM
+participant "reservation-type-model.ts\n<<model>>" as TM
+participant "city-model.ts\n<<model>>" as CM
+participant "reservation-model.ts\n<<model>>" as M
 database "MySQL" as DB
 
 U -> V : elige el tipo, la ciudad y escribe el nombre

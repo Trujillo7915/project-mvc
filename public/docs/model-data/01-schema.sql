@@ -22,6 +22,7 @@ USE project_mvc;
 -- Borrado en orden inverso a las dependencias
 DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `role`;
 DROP TABLE IF EXISTS person;
 DROP TABLE IF EXISTS reservation_type;
 DROP TABLE IF EXISTS city;
@@ -40,16 +41,27 @@ CREATE TABLE person (
   CONSTRAINT uk_person_email UNIQUE (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE `role` (
+  id          INT          NOT NULL AUTO_INCREMENT,
+  name        VARCHAR(50)  NOT NULL,
+  description VARCHAR(255) NULL,
+  CONSTRAINT pk_role PRIMARY KEY (id),
+  CONSTRAINT uk_role_name UNIQUE (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- `user` va entre comillas invertidas porque USER es palabra clave de MySQL
 CREATE TABLE `user` (
   id        INT          NOT NULL AUTO_INCREMENT,
   username  VARCHAR(50)  NOT NULL,
   password  VARCHAR(255) NOT NULL COMMENT 'Hash de la contraseña, nunca texto plano',
   person_id INT          NOT NULL,
+  role_id   INT          NOT NULL,
   CONSTRAINT pk_user PRIMARY KEY (id),
   CONSTRAINT uk_user_username UNIQUE (username),
   CONSTRAINT fk_user_person FOREIGN KEY (person_id)
-    REFERENCES person (id) ON DELETE RESTRICT
+    REFERENCES person (id) ON DELETE RESTRICT,
+  CONSTRAINT fk_user_role FOREIGN KEY (role_id)
+    REFERENCES `role` (id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -------------------------------------------------------------

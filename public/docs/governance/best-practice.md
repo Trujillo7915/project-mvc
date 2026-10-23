@@ -19,11 +19,11 @@ Reglas obligatorias para todo el que aporte código al proyecto. Si algo no est�
 |---|---|---|
 | `kebab-case` | `reservation-type` | Carpetas, archivos, URL, ramas, clases CSS, documentación |
 | `snake_case` | `reservation_type` | Base de datos: nombre de la base, tablas, columnas, restricciones e índices |
-| `camelCase` | `reservationTypeId` | JavaScript: variables, funciones, métodos, propiedades y campos JSON de la API |
-| `PascalCase` | `ReservationForm` | JavaScript: componentes React y clases |
+| `camelCase` | `reservationTypeId` | TypeScript / JavaScript: variables, funciones, métodos, propiedades y campos JSON de la API |
+| `PascalCase` | `ReservationForm` | TypeScript / React: componentes React, clases, tipos e interfaces |
 | `UPPER_SNAKE_CASE` | `DB_HOST`, `MAX_PAGE_SIZE` | Variables de entorno y constantes globales |
 
-Regla corta: **lo que es un archivo o una URL va en kebab-case, lo que vive en la base de datos va en snake_case y lo que vive dentro del código JavaScript va en camelCase o PascalCase.**
+Regla corta: **lo que es un archivo o una URL va en kebab-case, lo que vive en la base de datos va en snake_case y lo que vive dentro del código TypeScript va en camelCase o PascalCase.**
 
 ## 3. Por capa
 
@@ -32,7 +32,7 @@ Regla corta: **lo que es un archivo o una URL va en kebab-case, lo que vive en l
 | Elemento | Notación | Ejemplo |
 |---|---|---|
 | Carpeta | kebab-case | `src/view/reservation/reservation-type/` |
-| Archivo de componente | kebab-case | `reservation-type-form.jsx` |
+| Archivo de componente | kebab-case | `reservation-type-form.tsx` |
 | Nombre del componente | PascalCase | `export default function ReservationTypeForm()` |
 | Props, estado, handlers | camelCase | `reservationType`, `isLoading`, `handleSubmit` |
 | Booleanos | camelCase con `is`, `has`, `can` | `isOpen`, `hasError`, `canDelete` |
@@ -47,20 +47,20 @@ Regla corta: **lo que es un archivo o una URL va en kebab-case, lo que vive en l
 |---|---|---|
 | Segmento de URL | kebab-case, singular | `/reservation/reservation-type` |
 | Segmento dinámico | Lo exige Next.js | `[id]` |
-| Archivos especiales | Nombre fijo de Next.js | `page.jsx`, `layout.jsx`, `route.js`, `loading.jsx`, `not-found.jsx` |
+| Archivos especiales | Nombre fijo de Next.js | `page.tsx`, `layout.tsx`, `route.ts`, `loading.tsx`, `not-found.tsx` |
 | Endpoint de API | kebab-case, singular | `/api/reservation-type/[id]` |
 
 ### 3.3 Back (controller y model)
 
 | Elemento | Notación | Ejemplo |
 |---|---|---|
-| Archivo | kebab-case con el sufijo de la capa | `reservation-type-controller.js`, `reservation-type-model.js` |
+| Archivo | kebab-case con el sufijo de la capa | `reservation-type-controller.ts`, `reservation-type-model.ts` |
 | Clase | PascalCase | `ReservationTypeController` |
 | Función o método | camelCase, verbo + objeto | `getAll`, `getById`, `create`, `update`, `remove` |
 | Variable | camelCase | `reservationTypeId` |
 | Constante | UPPER_SNAKE_CASE | `DEFAULT_PAGE_SIZE` |
 | Campo JSON de entrada/salida | camelCase | `{ "reservationTypeId": 1, "cityId": 4 }` |
-| Utilidad en `assets/library` | kebab-case | `hash-password.js`, `format-date.js` |
+| Utilidad en `assets/library` | kebab-case | `hash-password.ts`, `format-date.ts` |
 
 El **model** es la frontera entre las dos convenciones: recibe y devuelve camelCase (`personId`) y traduce a snake_case (`person_id`) solo dentro del SQL.
 
@@ -93,7 +93,7 @@ Los nombres van en minúsculas porque **MySQL en Linux (Docker) distingue mayús
 
 ### 3.6 Archivos de configuración
 
-Se respeta el nombre que exige cada herramienta: `Dockerfile`, `docker-compose.yml`, `package.json`, `next.config.mjs`, `jsconfig.json`, `.env`, `.env.example`, `.gitignore`, `.dockerignore`.
+Se respeta el nombre que exige cada herramienta: `Dockerfile`, `docker-compose.yml`, `package.json`, `next.config.mjs`, `tsconfig.json`, `.env`, `.env.example`, `.gitignore`, `.dockerignore`.
 
 ## 4. Ramas
 
@@ -153,7 +153,7 @@ Flujo: `rama de trabajo → develop → qa → main`. Nunca se hace commit direc
 | Grupo | Scopes |
 |---|---|
 | Módulo | `client`, `reservation`, `location` |
-| Entidad | `person`, `user`, `reservation-type`, `state`, `city` |
+| Entidad | `person`, `role`, `user`, `reservation-type`, `state`, `city` |
 | Capa | `view`, `api`, `controller`, `model` |
 | Transversal | `db`, `docker`, `config`, `assets`, `governance`, `architecture` |
 

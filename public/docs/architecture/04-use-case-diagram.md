@@ -25,7 +25,8 @@
 | Consultar mis reservas | Cliente | Lista solo sus Reservation | |
 | Cancelar reserva | Cliente | Elimina una de sus reservas desde la consulta | «extend» Consultar mis reservas |
 | Gestionar personas | Administrador | CRUD de Person | |
-| Gestionar usuarios | Administrador | CRUD de User | «include» Validar persona |
+| Gestionar roles | Administrador | CRUD de Role | |
+| Gestionar usuarios | Administrador | CRUD de User | «include» Validar persona y rol |
 | Gestionar tipos de reserva | Administrador | CRUD de ReservationType | |
 | Gestionar reservas | Administrador | CRUD de todas las Reservation | «include» Validar usuario, tipo y ciudad |
 | Gestionar departamentos | Administrador | CRUD de State | |
@@ -33,5 +34,5 @@
 
 ## Supuestos por validar
 
-- **Roles:** las tablas no tienen un campo de rol. Para distinguir Cliente de Administrador falta una columna `role` en `user`, o una tabla `role`.
+- **Roles:** resuelto mediante la entidad normalizada `role` y la llave foránea `user.role_id` (permite distinguir `admin` de `client` cumpliendo 3FN).
 - **Iniciar sesión:** el inicio de sesión no está construido; se propone porque user tiene password.

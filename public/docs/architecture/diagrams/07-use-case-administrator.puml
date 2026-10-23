@@ -10,8 +10,9 @@ rectangle "project-mvc" {
 
   package "client" {
     usecase "Gestionar personas" as UC_Person
+    usecase "Gestionar roles" as UC_Role
     usecase "Gestionar usuarios" as UC_User
-    usecase "Validar persona" as UC_ValPerson
+    usecase "Validar persona y rol" as UC_ValPersonRole
   }
 
   package "reservation" {
@@ -29,13 +30,14 @@ rectangle "project-mvc" {
 
 Admin --> UC_Login
 Admin --> UC_Person
+Admin --> UC_Role
 Admin --> UC_User
 Admin --> UC_Type
 Admin --> UC_Reservation
 Admin --> UC_State
 Admin --> UC_City
 
-UC_User ..> UC_ValPerson : <<include>>
+UC_User ..> UC_ValPersonRole : <<include>>
 UC_Reservation ..> UC_ValRes : <<include>>
 UC_City ..> UC_ValState : <<include>>
 

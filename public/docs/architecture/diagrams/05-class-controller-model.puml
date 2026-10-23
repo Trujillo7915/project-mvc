@@ -7,6 +7,9 @@ package "controller" {
   class PersonController <<controller>> {
     +getAll() +getById(id) +create(data) +update(id, data) +remove(id)
   }
+  class RoleController <<controller>> {
+    +getAll() +getById(id) +create(data) +update(id, data) +remove(id)
+  }
   class UserController <<controller>> {
     +getAll() +getById(id) +create(data) +update(id, data) +remove(id)
   }
@@ -28,6 +31,9 @@ package "model" {
   class PersonModel <<model>> {
     +findAll() +findById(id) +insert(p) +update(id, p) +delete(id)
   }
+  class RoleModel <<model>> {
+    +findAll() +findById(id) +insert(ro) +update(id, ro) +delete(id)
+  }
   class UserModel <<model>> {
     +findAll() +findById(id) +insert(u) +update(id, u) +delete(id)
   }
@@ -46,8 +52,10 @@ package "model" {
 }
 
 PersonController --> PersonModel
+RoleController --> RoleModel
 UserController --> UserModel
 UserController ..> PersonModel : valida personId
+UserController ..> RoleModel : valida roleId
 ReservationTypeController --> ReservationTypeModel
 ReservationController --> ReservationModel
 ReservationController ..> UserModel : valida userId

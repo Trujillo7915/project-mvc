@@ -25,6 +25,7 @@ Los diagramas de secuencia de cada flujo están en [05-sequence-diagram.md](05-s
 | Módulo | Página | API |
 |---|---|---|
 | client | `/client/person`, `/client/person/[id]` | `/api/person`, `/api/person/[id]` |
+| client | `/client/role`, `/client/role/[id]` | `/api/role`, `/api/role/[id]` |
 | client | `/client/user`, `/client/user/[id]` | `/api/user`, `/api/user/[id]` |
 | reservation | `/reservation`, `/reservation/[id]` | `/api/reservation`, `/api/reservation/[id]` |
 | reservation | `/reservation/reservation-type`, `/reservation/reservation-type/[id]` | `/api/reservation-type`, `/api/reservation-type/[id]` |

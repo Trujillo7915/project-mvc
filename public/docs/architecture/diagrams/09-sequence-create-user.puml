@@ -8,24 +8,26 @@ participant "user-form.jsx\n<<view>>" as V
 participant "api/user/route.js\n<<route>>" as R
 participant "user-controller.js\n<<controller>>" as C
 participant "person-model.js\n<<model>>" as PM
+participant "role-model.js\n<<model>>" as RM
 participant "user-model.js\n<<model>>" as M
 database "MySQL" as DB
 
-U -> V : elige la persona, escribe username y contraseña
-V -> R : POST /api/user {username, password, personId}
+U -> V : elige persona y rol, escribe username y contraseña
+V -> R : POST /api/user {username, password, personId, roleId}
 R -> C : create(body)
 C -> C : validate(data)
 C -> PM : findById(personId)
 PM -> DB : SELECT
 DB --> PM : resultado
+C -> RM : findById(roleId)
+RM -> DB : SELECT
+DB --> RM : resultado
 
-alt la persona no existe
-  PM --> C : null
+alt la persona o el rol no existen
   C --> R : error de llave foránea
   R --> V : 404 Not Found
-  V --> U : "La persona no existe"
-else la persona existe
-  PM --> C : Person
+  V --> U : "La persona o el rol no existen"
+else persona y rol válidos
   C -> C : hashPassword(password)
   C -> M : insert(user)
   M -> DB : INSERT

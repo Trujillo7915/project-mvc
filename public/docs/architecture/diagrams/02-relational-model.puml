@@ -13,12 +13,20 @@ package "client" {
     phone : VARCHAR(20)
   }
 
+  entity "role" as role {
+    * id : INT <<PK>>
+    --
+    * name : VARCHAR(50) <<UK>>
+    description : VARCHAR(255)
+  }
+
   entity "user" as user {
     * id : INT <<PK>>
     --
     * username : VARCHAR(50) <<UK>>
     * password : VARCHAR(255) <<hash>>
     * person_id : INT <<FK>>
+    * role_id : INT <<FK>>
   }
 }
 
@@ -60,6 +68,7 @@ package "location" {
 }
 
 person ||--o{ user : tiene
+role ||--o{ user : asigna
 user ||--o{ reservation : realiza
 reservation_type ||--o{ reservation : clasifica
 state ||--o{ city : contiene
